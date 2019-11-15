@@ -16,7 +16,7 @@ services:
     ports: 
       - "3000:3000"
     depends_on: 
-      - "chatrooms-backend"
+      - "chatroom-backend"
     volumes:
       - "./frontend/src:/app/src"
       - "./frontend/public:/app/public"

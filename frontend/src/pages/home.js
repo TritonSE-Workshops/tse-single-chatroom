@@ -18,8 +18,8 @@ class Home extends Component {
       <div className="container separation-large">
         <div className="row separation">
           <div className="twelve columns">
-            <h2>Welcome ... to a chatroom! </h2>
-            <h5>Your name is <i>{this.state.name}</i>. This channel is <i>{this.state.channel}</i>. You can access the home page from <a href="/">here.</a></h5>
+            <h2>Welcome to a simple chatroom!</h2>
+            <h5>Your client will poll for messages. You can submit messages and change your name using the appropriate form boxes.</h5>
           </div>
         </div>
         <div className="row separation">

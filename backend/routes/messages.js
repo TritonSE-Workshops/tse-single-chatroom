@@ -6,8 +6,8 @@ var { Message } = require('../models');
 
 router.get('/', function(req, res) {
   // Parse limit field, bad requests are just returned with 400's
-  let limit = parseInt(req.query.limit || '100', 10);
-  if (limit < 1 || limit > 1000) {
+  let limit = parseInt(req.query.limit || '30', 10);
+  if (limit < 1 || limit > 100) {
     res.status(400).json({ error: true, message: 'Invalid limit.' });
     return;
   }
@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
   // Client can specify a cutoff date
   if ('after' in req.query) {
     let cutoff_date = new Date(req.query.after);
-    query = Message.find({ channel: channel._id, created_at: { "$gte" : cutoff_date } });
+    query = Message.find({ created_at: { "$gte" : cutoff_date } });
   }
   // Sort messages by date
   query = query.sort('-created_at');
