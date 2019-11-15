@@ -39,7 +39,8 @@ class MessageForm extends Component {
 
   render() {
     return (<div>
-        <h3>Add a Message</h3>
+        <h4>Add a Message</h4>
+        <p>Enter content below and press submit when ready.</p>
         <form onSubmit={this.handleMessageSubmit} id="message-form">
           <label>Content: </label>
           <input type="text" className="u-full-width" onChange={this.handleMessageChange}/><br/>

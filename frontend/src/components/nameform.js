@@ -32,8 +32,8 @@ class NameForm extends Component {
 
   render() {
     return (<div>
-        <h3>Change Your Name</h3>
-        <p>Your name is currently {this.state.name}.</p>
+        <h4>Change Your Name</h4>
+        <p>Your name is currently <b>{this.state.name}</b>.</p>
         <form onSubmit={this.handleNameSubmit} id="name-form">
           <label>Name: </label>
           <input type="text" className="u-full-width" onChange={this.handleNameChange}/><br/>
