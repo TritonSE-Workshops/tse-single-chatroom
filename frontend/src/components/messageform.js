@@ -29,7 +29,7 @@ class MessageForm extends Component {
     }
 
     axios.post(`http://${baseUrl}/api/messages`, {
-      sender: localStorage.get("name"),
+      sender: localStorage.getItem("name"),
       content: message
     }).then(res => {
       document.getElementById("message-form").reset();
