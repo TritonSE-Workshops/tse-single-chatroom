@@ -29,11 +29,12 @@ class MessageForm extends Component {
     }
 
     axios.post(`http://${baseUrl}/api/messages`, {
-      sender: this.state.name,
-      content: message,
-      channel: this.state.channel 
+      sender: localStorage.get("name"),
+      content: message
     }).then(res => {
       document.getElementById("message-form").reset();
+    }).catch(err => {
+      console.log(err);
     });
   }
 
