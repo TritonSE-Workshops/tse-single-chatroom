@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import MessageList from '../components/messagelist';
-import MessageForm from '../components/messageform';
-import NameForm from '../components/nameform';
+import MessageList from '../components/MessageList';
+import MessageForm from '../components/MessageForm';
+import NameForm from '../components/NameForm';
 
 class Home extends Component {
   constructor(props) {
