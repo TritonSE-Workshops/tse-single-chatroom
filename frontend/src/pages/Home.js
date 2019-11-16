@@ -4,13 +4,31 @@ import MessageList from '../components/MessageList';
 import MessageForm from '../components/MessageForm';
 import NameForm from '../components/NameForm';
 
+class MessageRefresher {
+  constructor() {
+    this.trigger = () => {};
+
+    this.refreshMessages = this.refreshMessages.bind(this);
+    this.registerTrigger = this.registerTrigger.bind(this);
+  }
+
+  refreshMessages() {
+    this.trigger();
+  }
+
+  registerTrigger(callback) {
+    this.trigger = callback;
+  }
+}
+
 class Home extends Component {
   constructor(props) {
     super(props);
-    let sender = localStorage.getItem('name');
-    if (sender == null) {
+    if (localStorage.getItem('name') == null) {
       localStorage.setItem('name', 'anon');
     }
+    this.refresher = new MessageRefresher();
+    console.log(this.refresher);
   }
 
   render() {
@@ -24,10 +42,10 @@ class Home extends Component {
         </div>
         <div className="row separation">
           <div className="six columns">
-            <MessageList/> 
+            <MessageList refresher={this.refresher}/> 
           </div>
           <div className="six columns">
-            <MessageForm/> 
+            <MessageForm refresher={this.refresher}/>
             <NameForm/> 
           </div>
         </div>

@@ -16,8 +16,11 @@ class Channel extends Component {
       heartbeat: null,
       heartbeat_timestamp: new Date()
     }
+    this.heartbeat_lock = false;
 
     this.handleHeartbeat = this.handleHeartbeat.bind(this);
+
+    props.refresher.registerTrigger(this.handleHeartbeat);
   }
 
   componentDidMount() {
@@ -38,10 +41,15 @@ class Channel extends Component {
   // that we're not fetching redundant data, and we're updating in the most 'efficient'
   // way possible.
   handleHeartbeat() {
+    if (this.heartbeat_lock) {
+      return;
+    }
+    this.heartbeat_lock = true;
     axios.get(`http://${baseUrl}/api/messages?limit=${MESSAGE_LIMIT}&after=${this.state.heartbeat_timestamp.toISOString()}`).then(res => {
       let new_messages = res.data.data;
       let messages = new_messages.length > 0 ? new_messages.concat(this.state.messages).slice(0, MESSAGE_LIMIT) : this.state.messages; 
       this.setState({ messages : messages, heartbeat_timestamp: new Date() });
+      this.heartbeat_lock = false;
     });
   }
 

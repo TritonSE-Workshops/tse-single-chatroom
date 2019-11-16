@@ -11,6 +11,7 @@ class MessageForm extends Component {
     this.state = {
       form_message: ''
     }
+    this.refresher = props.refresher;
 
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
@@ -28,11 +29,13 @@ class MessageForm extends Component {
       return;
     }
 
+    let self = this;
     axios.post(`http://${baseUrl}/api/messages`, {
       sender: localStorage.getItem("name"),
       content: message
     }).then(res => {
       document.getElementById("message-form").reset();
+      self.refresher.refreshMessages();
     }).catch(err => {
       console.log(err);
     });
