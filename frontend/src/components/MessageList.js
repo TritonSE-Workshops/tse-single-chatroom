@@ -45,12 +45,19 @@ class Channel extends Component {
       return;
     }
     this.heartbeat_lock = true;
+    axios.get(`http://${baseUrl}/api/messages?limit=${MESSAGE_LIMIT}`).then(res => {
+      let messages = res.data.data;
+      this.setState({ messages : messages, heartbeat_timestamp: new Date() });
+      this.heartbeat_lock = false;
+    });
+    /*
     axios.get(`http://${baseUrl}/api/messages?limit=${MESSAGE_LIMIT}&after=${this.state.heartbeat_timestamp.toISOString()}`).then(res => {
       let new_messages = res.data.data;
       let messages = new_messages.length > 0 ? new_messages.concat(this.state.messages).slice(0, MESSAGE_LIMIT) : this.state.messages; 
       this.setState({ messages : messages, heartbeat_timestamp: new Date() });
       this.heartbeat_lock = false;
     });
+    */
   }
 
   render() {
