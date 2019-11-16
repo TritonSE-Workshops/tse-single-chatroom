@@ -8,48 +8,19 @@ class MessageForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      form_message: ''
-    }
+    // Calling this.refresher.refreshMessages() will force 
+    // the list of messages to be updated, regardless of the polling
+    // interval. Think of it like force refreshing a web page.
     this.refresher = props.refresher;
 
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-    this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
-  }
-
-  handleMessageChange(event) {
-    this.setState({ form_message : event.target.value });
-  }
-
-  handleMessageSubmit(event) {
-    event.preventDefault();
-
-    let message = this.state.form_message;
-    if (message == null || message === '') {
-      return;
-    }
-
-    let self = this;
-    axios.post(`http://${baseUrl}/api/messages`, {
-      sender: localStorage.getItem("name"),
-      content: message
-    }).then(res => {
-      document.getElementById("message-form").reset();
-      self.refresher.refreshMessages();
-    }).catch(err => {
-      console.log(err);
-    });
+    // TODO: Initialize this.state, bind functions, etc. 
   }
 
   render() {
+    // TODO: Add a form here to allow users to enter in messages and submit them.
+    // What other component uses a form? Maybe repurpose code from that component?
     return (<div>
         <h4>Add a Message</h4>
-        <p>Enter content below and press submit when ready.</p>
-        <form onSubmit={this.handleMessageSubmit} id="message-form">
-          <label>Content: </label>
-          <input type="text" className="u-full-width" onChange={this.handleMessageChange}/><br/>
-          <input type="submit" value="Submit"/>
-        </form>
       </div>
     );
   }
